@@ -7,23 +7,17 @@ csv、xls、xlsx、文件通过 JavaScript 解析成为 JSON 数据，支持行�
 
 ``` Vue
 <template>
-  <div class="home">
-    <a-upload
-      :beforeUpload="beforeUpload">
-      <a-button> <a-icon type="upload" /> Upload </a-button>
-    </a-upload>
-  </div>
+  <input type="file" @change="read">
 </template>
-
 <script>
 import { formJson } from './form-json/form'
 export default {
   methods: {
-    beforeUpload (file, fileList) {
+    read (e) {
+      const file = e.target.files[0]
       formJson(file, (code, data) => {
         console.log(code, data)
       })
-      return false
     }
   }
 }
