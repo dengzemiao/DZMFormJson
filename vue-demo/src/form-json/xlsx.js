@@ -1,7 +1,7 @@
 // 基于: 文件导入方式
 import XLSX from './xlsx.full.min'
 // 基于: npm install xlsx
-// import XLSX from 'xlsx'
+// var XLSX = require("xlsx")
 // 将 xls、xlsx 文件解析成 JSON
 export function xlsxJson (file, result) {
   // 读取完成的数据

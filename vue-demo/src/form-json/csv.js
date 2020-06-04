@@ -1,5 +1,7 @@
 // 基于: jschardet.min.js
 import jschardet from './jschardet.min'
+// 基于: npm install jschardet
+// var jschardet = require("jschardet")
 // 将 csv 文件解析成 JSON
 export function csvJson (file, result) {
   // 检测是浏览器是否支持 readAsBinaryString 函数
