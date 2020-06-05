@@ -18,14 +18,14 @@ export function csvJson (file, result) {
       dataString = data
       var newArray = []
       for (var index = 0; index < data.length; index++) {
-          newArray.push(data.charCodeAt(index));
+          newArray.push(data.charCodeAt(index))
       }
       dataArray = new Uint8Array(newArray)
     } else {
       // 此时 data 为 ArrayBuffer
       dataArray = new Uint8Array(data)
-      for (var index in dataArray) {
-        dataString += String.fromCharCode(dataArray[index]);
+      for (const index in dataArray) {
+        dataString += String.fromCharCode(dataArray[index])
         // 考虑到效率，只取前100个用于判断字符集
         if (index >= 100) { break }
       }
