@@ -10,7 +10,7 @@ import { csvJson } from './csv'
     // 2: 不支持解析该文件格式
     // 3: 不支持解析该文件编码格式
 
-    // data: [
+    // sheets: [
       {
         name: 'xxx',
         list: []

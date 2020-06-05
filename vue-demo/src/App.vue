@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <input type="file" @change="read">
+    <div>上传文件之后，请查看控制台 console.log() 输出结果</div>
   </div>
 </template>
 <script>
@@ -9,8 +10,8 @@ export default {
   methods: {
     read (e) {
       const file = e.target.files[0]
-      formJson(file, (code, data) => {
-        console.log(code, data)
+      formJson(file, (code, sheets) => {
+        console.log(code, sheets)
       })
     }
   }
