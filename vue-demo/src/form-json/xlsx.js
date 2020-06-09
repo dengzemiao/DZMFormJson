@@ -86,7 +86,7 @@ function handleMerge (merge, sheetJson) {
 // 检查数据对象并处理为需要的数据格式
 function handleDataFormat (sheet) {
   // 遍历所有行
-  sheet.forEach((row, rowIndex) => {
+  sheet.forEach((row) => {
     // 遍历所有列
     row.forEach((col, colIndex) => {
       // 检查每列数据
