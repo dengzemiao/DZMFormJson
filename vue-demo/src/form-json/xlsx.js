@@ -15,12 +15,14 @@ export function xlsxJson (file, result) {
     var data = e.target.result
     if(rABS) {
       wb = XLSX.read(data, {
-        type: 'binary'
+        type: 'binary',
+        cellDates: true
       })
     } else {
       // 以base64方式读取
       wb = XLSX.read(btoa(fixdata(data)), {
-        type: 'base64'
+        type: 'base64',
+        cellDates: true
       })
     }
     // 将数据处理成需要的JSON
@@ -46,7 +48,11 @@ function handleJson (data, result) {
   sheetNames.forEach((item) => {
     const sheet = sheets[item]
     const merges = sheet['!merges'] || []
-    var sheetJson = XLSX.utils.sheet_to_json(sheets[item], { header: 1 })
+    // 将 sheet 转成 json
+    var sheetJson = XLSX.utils.sheet_to_json(sheet, { header: 1 })
+    // json 数据内部格式处理
+    handleDataFormat(sheetJson)
+    // json 合并单元格处理
     merges.forEach((item) => {
       handleMerge(item, sheetJson)
     })
@@ -75,6 +81,26 @@ function handleMerge (merge, sheetJson) {
       sheetJson[start.r][index] = item
     }
   }
+}
+
+// 检查数据对象并处理为需要的数据格式
+function handleDataFormat (sheet) {
+  // 遍历所有行
+  sheet.forEach((row, rowIndex) => {
+    // 遍历所有列
+    row.forEach((col, colIndex) => {
+      // 检查每列数据
+      if (typeof col === 'object') {
+        // 判断是否为时间格式
+        var date = new Date(col)
+        if (!isNaN(date.getTime())) {
+          // 将时间格式装换为指定格式字符串
+          const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+          row[colIndex] = dateString
+        }
+      }
+    })
+  })
 }
 
 // 文件流转 BinaryString
