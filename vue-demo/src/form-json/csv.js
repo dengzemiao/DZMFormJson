@@ -97,6 +97,6 @@ function CSVtoArray(text) {
           return ''; // Return empty string.
       });
   // Handle special case of empty last value.
-  if (/,\s*$/.test(text)) a.Push('');
+  if (/,\s*$/.test(text)) a.push('');
   return a;
 };
