@@ -5,12 +5,11 @@
   </div>
 </template>
 <script>
-import { formJson } from './form-json/form'
 export default {
   methods: {
     read (e) {
       const file = e.target.files[0]
-      formJson(file, (code, sheets) => {
+      this.$formJson(file, (code, sheets) => {
         console.log(code, sheets)
       })
     }
