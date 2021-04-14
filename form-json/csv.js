@@ -1,9 +1,7 @@
 // 基于: jschardet.min.js
-import jschardet from './jschardet.min'
-// 基于: npm install jschardet
-// var jschardet = require("jschardet")
+var jschardet = require('./jschardet.min')
 // 将 csv 文件解析成 JSON
-export function csvJson (file, result) {
+function csvJson (file, result) {
   // 检测是浏览器是否支持 readAsBinaryString 函数
   var rABS = typeof FileReader !== 'undefined' && typeof FileReader.prototype !== 'undefined' && typeof FileReader.prototype.readAsBinaryString !== 'undefined'
   // 创建 FileReader
@@ -18,14 +16,14 @@ export function csvJson (file, result) {
       dataString = data
       var newArray = []
       for (var index = 0; index < data.length; index++) {
-          newArray.push(data.charCodeAt(index));
+          newArray.push(data.charCodeAt(index))
       }
       dataArray = new Uint8Array(newArray)
     } else {
       // 此时 data 为 ArrayBuffer
       dataArray = new Uint8Array(data)
-      for (var index in dataArray) {
-        dataString += String.fromCharCode(dataArray[index]);
+      for (const index in dataArray) {
+        dataString += String.fromCharCode(dataArray[index])
         // 考虑到效率，只取前100个用于判断字符集
         if (index >= 100) { break }
       }
@@ -100,3 +98,8 @@ function CSVtoArray(text) {
   if (/,\s*$/.test(text)) a.push('');
   return a;
 };
+
+// 导出
+module.exports = {
+  csvJson
+}
