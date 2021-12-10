@@ -5,6 +5,7 @@
   </div>
 </template>
 <script>
+// import FormJson from '../../form-json/form'
 export default {
   methods: {
     read (e) {
@@ -12,6 +13,9 @@ export default {
       this.$formJson(file, (code, sheets) => {
         console.log(code, sheets)
       })
+      // FormJson(file, (code, sheets) => {
+      //   console.log(code, sheets)
+      // })
     }
   }
 }
