@@ -11,20 +11,31 @@ function xlsxJson (file, result) {
   // 读取回调
   reader.onload = function (e) {
     var data = e.target.result
+    var err = undefined
     if(rABS) {
-      wb = XLSX.read(data, {
-        type: 'binary',
-        cellDates: true
-      })
+      try { 
+        wb = XLSX.read(data, {
+          type: 'binary',
+          cellDates: true
+        })
+      } catch (error) { err = error }
     } else {
       // 以base64方式读取
-      wb = XLSX.read(btoa(fixdata(data)), {
-        type: 'base64',
-        cellDates: true
-      })
+      try { 
+        wb = XLSX.read(btoa(fixdata(data)), {
+          type: 'base64',
+          cellDates: true
+        })
+      } catch (error) { err = error }
     }
     // 将数据处理成需要的JSON
-    handleJson(wb, result)
+    if (wb) {
+      // 读取成功
+      handleJson(wb, result)
+    } else {
+      // 读取失败
+      result(1, err)
+    }
   }
   // 开始读取
   if(rABS) {
