@@ -6,17 +6,14 @@
 </template>
 
 <script>
-import FormJson from '../../../form-json/form'
+import ex2json from 'ex2json'
 export default {
   methods: {
     read (e) {
+      // 文件对象
       const file = e.target.files[0]
-      // npm 导入
-      // this.$formJson(file, (code, sheets) => {
-      //   console.log(code, sheets)
-      // })
-      // 本地导入
-      FormJson(file, (code, sheets) => {
+      // 转成成 json
+      ex2json.parse(file, (code, sheets) => {
         console.log(code, sheets)
       })
     }

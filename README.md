@@ -1,53 +1,41 @@
-# DZMFormJson
+# ex2json
 
-csv、xls、xlsx、文件通过 JavaScript 解析成为 JSON 数据，支持行列合并问题，CSV文件逗号分隔问题。
+csv、xls、xlsx、文件通过 JavaScript 解析成为 JSON 数据，支持行列合并问题，CSV 文件逗号分隔问题。
 
 ![Demo效果](demo.gif)
 
-* 通过 npm 引入
+- 安装
 
-  ```
-  npm i dzm-form-json
-  ```
-
-* `main.js` 导入
-
-  ```
-  import Vue from 'vue'
-  import App from './App.vue'
-  import router from './router'
-
-  Vue.config.productionTip = false
-
-  // 导入 DZMFormJson
-  import DZMFormJson from 'dzm-form-json'
-  Vue.prototype.$formJson = DZMFormJson
-
-  new Vue({
-    router,
-    render: h => h(App)
-  }).$mount('#app')
+  ```sh
+  $ npm i ex2json
   ```
 
-* 使用
+- 引入
 
+  ```js
+  import ex2json from "ex2json";
   ```
+
+- 使用
+
+  ```html
   <template>
-    <div id="app">
-      <input type="file" @change="read">
-    </div>
+    <input type="file" @change="read" />
   </template>
+
   <script>
-  export default {
-    methods: {
-      read (e) {
-        const file = e.target.files[0]
-        // 使用
-        this.$formJson(file, (code, sheets) => {
-          console.log(code, sheets)
-        })
-      }
-    }
-  }
+    import ex2json from "ex2json";
+    export default {
+      methods: {
+        read(e) {
+          // 文件对象
+          const file = e.target.files[0];
+          // 转成成 json
+          ex2json.parse(file, (code, sheets) => {
+            console.log(code, sheets);
+          });
+        },
+      },
+    };
   </script>
   ```

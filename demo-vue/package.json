@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "core-js": "^3.19.3",
-    "dzm-form-json": "^1.1.1",
+    "ex2json": "^0.0.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.3"
   },
